@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atomik Data Solutions - Transforming Insights Into Results</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0066cc;
+            --dark-blue: #001f4d;
+            --light-blue: #4da6ff;
+            --accent-blue: #66b3ff;
+            --text-dark: #1a1a1a;
+            --text-light: #ffffff;
+            --bg-light: #f5f7fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+            color: var(--text-light);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent-blue);
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+            color: var(--text-light);
+            padding: 120px 2rem 80px;
+            text-align: center;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-blue) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0.1;
+            top: -100px;
+            right: -100px;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-blue) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0.1;
+            bottom: -100px;
+            left: -100px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+            color: var(--accent-blue);
+            font-weight: 300;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        .services-brief {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .service-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-blue);
+            color: var(--dark-blue);
+            padding: 14px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(102, 179, 255, 0.4);
+        }
+
+        .cta-button:hover {
+            background: var(--text-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 179, 255, 0.6);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark-blue);
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-blue));
+            border-radius: 2px;
+        }
+
+        /* Problem Section */
+        .problems {
+            background: var(--bg-light);
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-blue);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 102, 204, 0.15);
+        }
+
+        .problem-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .problem-card p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* Services Section */
+        .services {
+            background: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(102, 179, 255, 0.05) 100%);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--accent-blue);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(102, 179, 255, 0.1) 100%);
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 8px 25px rgba(0, 102, 204, 0.2);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-card ul {
+            list-style: none;
+            text-align: left;
+            color: #555;
+        }
+
+        .service-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 102, 204, 0.1);
+        }
+
+        .service-card li:last-child {
+            border-bottom: none;
+        }
+
+        .service-card li::before {
+            content: '✓ ';
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Process Section */
+        .process {
+            background: var(--bg-light);
+        }
+
+        .process-flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .process-step {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .process-step::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .process-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 102, 204, 0.2);
+        }
+
+        .process-step h3 {
+            color: var(--dark-blue);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .process-step p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: white;
+        }
+
+        .contact h2::after {
+            background: linear-gradient(90deg, var(--accent-blue), white);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-dark);
+            transition: background 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 179, 255, 0.3);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-item h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .contact-item p {
+            opacity: 0.9;
+        }
+
+        .contact-item a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-item a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-blue);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            nav a {
+                margin: 0 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 50px 1.5rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .services-brief {
+                grid-template-columns: 1fr;
+            }
+
+            .process-flow {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+
+            .problems-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 0.5rem 0;
+            }
+
+            .header-content {
+                padding: 0 1rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 100px 1rem 60px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">ATOMIK<span>.</span></div>
+            <nav>
+                <a href="#services">Servicios</a>
+                <a href="#process">Proceso</a>
+                <a href="#contact">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Atomik Data Solutions</h1>
+            <p class="tagline">"Transforming Insights Into Results"</p>
+            <p class="description">
+                Optimización de Procesos • Automatización • Gestión de Datos
+            </p>
+            <div class="services-brief">
+                <div class="service-item">📊 Dashboards en Tiempo Real</div>
+                <div class="service-item">⚙️ Automatización de Procesos</div>
+                <div class="service-item">📱 Apps de Negocio</div>
+            </div>
+            <button class="cta-button" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+                Conversemos →
+            </button>
+        </div>
+    </section>
+
+    <!-- Problems Section -->
+    <section class="problems">
+        <h2>El Desafío de Escalar</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 2rem; font-size: 1.1rem;">
+            Tu negocio está creciendo... pero cada vez es más difícil de controlar
+        </p>
+        <div class="problems-grid">
+            <div class="problem-card">
+                <h3>⏱️ Procesos Manuales</h3>
+                <p>Horas de trabajo cada semana en tareas repetitivas que podrían automatizarse</p>
+            </div>
+            <div class="problem-card">
+                <h3>📊 Información Dispersa</h3>
+                <p>Datos en Excel, WhatsApp y sistemas desconectados sin visibilidad real</p>
+            </div>
+            <div class="problem-card">
+                <h3>⚠️ Sin Control Operativo</h3>
+                <p>Dependencia de personas clave y falta de estructura para escalar</p>
+            </div>
+            <div class="problem-card">
+                <h3>📉 Decisiones Lentas</h3>
+                <p>Información en tiempo real para tomar decisiones estratégicas a tiempo</p>
+            </div>
+            <div class="problem-card">
+                <h3>💰 Costos Ocultos</h3>
+                <p>Pierdes entre 20-30% del tiempo operativo en ineficiencias no visibles</p>
+            </div>
+            <div class="problem-card">
+                <h3>📈 Crecimiento Frenado</h3>
+                <p>El caos operativo te impide escalar y crecer rentablemente</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2>Nuestras Soluciones</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 2rem; font-size: 1.1rem;">
+            No solo analizamos tu negocio, lo transformamos con soluciones que generan resultados reales
+        </p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Visibilidad del Negocio (BI)</h3>
+                <ul>
+                    <li>Dashboards en tiempo real</li>
+                    <li>KPIs claros de ventas, operaciones y costos</li>
+                    <li>Información centralizada y confiable</li>
+                    <li>Decisiones más rápidas y confiables</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3>Automatización de Procesos</h3>
+                <ul>
+                    <li>Automatización de tareas repetitivas</li>
+                    <li>Integración de sistemas</li>
+                    <li>Eliminación de procesos manuales</li>
+                    <li>Ahorro de tiempo y reducción de errores</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3>Apps de Negocio</h3>
+                <ul>
+                    <li>Aplicaciones personalizadas</li>
+                    <li>Gestión de operaciones (ventas, inventario, procesos)</li>
+                    <li>Herramientas simples para tu equipo</li>
+                    <li>Operación estructurada y escalable</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <h2>Cómo Trabajamos</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 2rem; font-size: 1.1rem;">
+            Cada proyecto comienza con un diagnóstico para asegurar impacto real
+        </p>
+        <div class="process-flow">
+            <div class="process-step" data-step="01">
+                <h3>Diagnóstico</h3>
+                <p>Análisis profundo de tus procesos actuales e ineficiencias clave</p>
+            </div>
+            <div class="process-step" data-step="02">
+                <h3>Análisis de Impacto</h3>
+                <p>Identificamos cuellos de botella y oportunidades de mayor impacto</p>
+            </div>
+            <div class="process-step" data-step="03">
+                <h3>Diseño de Solución</h3>
+                <p>Creamos soluciones adaptadas específicamente a tu negocio</p>
+            </div>
+            <div class="process-step" data-step="04">
+                <h3>Implementación</h3>
+                <p>Ejecutamos cambios con resultados medibles en pocas semanas</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2>Demos el Siguiente Paso</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+            Transforma tu operación hoy para escalar sin límites mañana
+        </p>
+        
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Teléfono</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="company">Empresa</label>
+                <input type="text" id="company" name="company">
+            </div>
+            <div class="form-group">
+                <label for="message">Mensaje</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="cta-button" style="width: 100%; margin-top: 0;">
+                Enviar Mensaje
+            </button>
+        </form>
+
+        <div class="contact-info">
+            <div class="contact-item">
+                <h3>📧 Juan Cadenas</h3>
+                <p><a href="mailto:juan.cadenas.lavado@gmail.com">juan.cadenas.lavado@gmail.com</a></p>
+                <p><a href="tel:+50763812449">+507 6381 2449</a></p>
+            </div>
+            <div class="contact-item">
+                <h3>📧 Carlos Uribe</h3>
+                <p><a href="mailto:carlos.uribe@gmail.com">carlos.uribe@gmail.com</a></p>
+                <p><a href="tel:+573322425593">+57 332 2425593</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Atomik Data Solutions. Todos los derechos reservados.</p>
+        <p>Panamá 🇵🇦 | Colombia 🇨🇴</p>
+    </footer>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const company = document.getElementById('company').value;
+            const message = document.getElementById('message').value;
+            
+            // Crear mensaje para WhatsApp
+            const text = `Hola, me llamo ${name}\n\nEmpresa: ${company}\nEmail: ${email}\nTeléfono: ${phone}\n\nMensaje:\n${message}`;
+            const encoded = encodeURIComponent(text);
+            
+            // Abrir WhatsApp con el contacto principal
+            window.open(`https://wa.me/+50763812449?text=${encoded}`, '_blank');
+            
+            // Limpiar el formulario
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
